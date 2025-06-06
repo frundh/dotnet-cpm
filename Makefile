@@ -11,10 +11,9 @@ VERSION_LOCK ?= Minor
 help:
 	@echo "Available targets:"
 	@echo "  upgrade-packages:  Upgrade all NuGet packages in the solution"
-	@echo "                       Version lock options:"
-	@echo "                         Major: Upgrade to the latest major version"
-	@echo "                         Minor: Upgrade to the latest minor version (default)"
-	@echo "                         Patch: Upgrade to the latest patch version"
+	@echo "                       Variables:"
+	@echo "                         VERSION_LOCK: Specifies whether the package should be locked to the current Major or Minor version."
+	@echo "                                       Possible values: None, Major (default) or Minor."
 	@echo "                       Example: make upgrade-packages VERSION_LOCK=Major"
 	@echo "  help:              Show this help message"
 
