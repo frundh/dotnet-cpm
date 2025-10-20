@@ -16,4 +16,14 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <!-- Automatically include central appsettings.json for projects in src directory (including nested) -->
+  <!-- Note: Content files from referenced projects will be copied to dependent projects' output directories -->
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' And $(MSBuildProjectDirectory.Contains('$(MSBuildThisFileDirectory)src'))">
+    <Content Include="$(MSBuildThisFileDirectory)appsettings.json">
+      <Link>appsettings.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PrivateAssets>all</PrivateAssets>
+    </Content>
+  </ItemGroup>
+
 </Project>
