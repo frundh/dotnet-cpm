@@ -3,6 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
@@ -16,14 +17,26 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <!-- Automatically include central appsettings.json for projects in src directory (including nested) -->
+  <!-- Automatically include central configuration files for projects in src directory (including nested) -->
   <!-- Note: Content files from referenced projects will be copied to dependent projects' output directories -->
-  <ItemGroup Condition="'$(IsTestProject)' != 'true' And $(MSBuildProjectDirectory.Contains('$(MSBuildThisFileDirectory)src'))">
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' And $(MSBuildProjectDirectory.Replace('\','/').Contains('src/apps'))">
     <Content Include="$(MSBuildThisFileDirectory)appsettings.json">
       <Link>appsettings.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <PrivateAssets>all</PrivateAssets>
     </Content>
   </ItemGroup>
+  
+  <!-- Copy central launchSettings.json to Properties folder so Visual Studio and dotnet run can find it -->
+  <!-- Run early in the process so VS picks up profiles immediately -->
+  <Target Name="CopyLaunchSettings" BeforeTargets="BeforeBuild;Restore">
+    <ItemGroup Condition="'$(IsTestProject)' != 'true' And $(MSBuildProjectDirectory.Replace('\','/').Contains('src/apps'))">
+      <_CentralLaunchSettings Include="$(MSBuildThisFileDirectory)launchSettings.json" />
+    </ItemGroup>
+    <MakeDir Directories="Properties" Condition="'@(_CentralLaunchSettings)' != ''" />
+    <Copy SourceFiles="@(_CentralLaunchSettings)" 
+          DestinationFiles="Properties/launchSettings.json" 
+          Condition="'@(_CentralLaunchSettings)' != ''" />
+  </Target>
 
 </Project>

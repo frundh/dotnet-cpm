@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Bar\Bar.csproj" />
+    <ProjectReference Include="..\..\src\libs\Bar\Bar.csproj" />
   </ItemGroup>
 
 </Project>

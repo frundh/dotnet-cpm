@@ -1,8 +1,12 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/Bar/Bar.csproj" />
-    <Project Path="src/Baz/Baz.csproj" />
-    <Project Path="src/Foo/Foo.csproj" />
+  <Folder Name="/src/libs/">
+    <Project Path="src/libs/Bar/Bar.csproj" />
+    <Project Path="src/libs/Baz/Baz.csproj" />
+    <Project Path="src/libs/Foo/Foo.csproj" />
+  </Folder>
+  <Folder Name="/src/apps/">
+    <Project Path="src/apps/ConsoleApp/ConsoleApp.csproj" />
+    <Project Path="src/apps/WebApi/WebApi.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Bar.Tests/Bar.Tests.csproj" />

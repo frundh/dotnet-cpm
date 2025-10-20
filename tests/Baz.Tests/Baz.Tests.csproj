@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Baz\Baz.csproj" />
+    <ProjectReference Include="..\..\src\libs\Baz\Baz.csproj" />
   </ItemGroup>
 
 </Project>
